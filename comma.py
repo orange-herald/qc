@@ -2,7 +2,7 @@ import re
 import humanize
 
 
-def add_the_commas_h(i):
+def add_the_commas_humanize(i):
     """
     Simplest method using third-party hummanize package.
     :link https://pypi.python.org/pypi/humanize
@@ -12,7 +12,7 @@ def add_the_commas_h(i):
     return str(humanize.intcomma(i))
 
 
-def add_the_commas(i):
+def add_the_commas_regex(i):
     """
     Simple-ish implementation using regular expression
     to parse string version of input and insert correct
@@ -61,9 +61,14 @@ def add_the_commas_diy(i):
     if len(number) < 4:
         return number
 
-    number_list = list(number)
+    decimal_part = False
 
-    # number_list.reverse()
+    # Special case: decimal values
+    if number.find('.') is not -1:
+        decimal_part = number.split('.')[1]
+        number = number.split('.')[0]
+
+    number_list = list(number)
 
     good_number = []
 
@@ -81,37 +86,9 @@ def add_the_commas_diy(i):
         good_number.append(number_list[position])
         position += 1
 
-    return ''.join(good_number)
+    good_number = ''.join(good_number)
 
+    if decimal_part is not False:
+        return '.'.join([good_number, decimal_part])
 
-if __name__ == '__main__':
-    print(add_the_commas_diy(123456789))
-    print(add_the_commas_diy(12345678))
-    print(add_the_commas_diy(1234567))
-    print(add_the_commas_diy(123456))
-    print(add_the_commas_diy(12345))
-    print(add_the_commas_diy(1234))
-    print(add_the_commas_diy(123))
-
-
-
-    # print(commas_with_humanize(123456789.004567))
-
-    # assert add_the_commas(1234) == '1,234'
-    # print(add_the_commas(1234))
-    #
-    # assert add_the_commas(1234567) == '1,234,567'
-    # print(add_the_commas(1234567))
-    #
-    # assert add_the_commas(123456789) == '123,456,789'
-    # print(add_the_commas(123456789))
-    #
-    # assert add_the_commas(10) == '10'
-    # print(add_the_commas(10))
-    #
-    # """
-    # Additional test to ensure floating-point values
-    # correctly displayed without commas in decimal portion.
-    # """
-    # assert add_the_commas(123456.045124) == '123,456.045124'
-    # print(add_the_commas(123456.045124))
+    return good_number

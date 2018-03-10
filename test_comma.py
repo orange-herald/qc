@@ -6,7 +6,7 @@ test_data = {
     1234567: '1,234,567',
     123456789: '123,456,789',
     10: '10',
-    123456.045124: '123456.045124'  # additional test for FP values
+    123456.045124: '123,456.045124'  # additional test for FP values
 }
 
 
