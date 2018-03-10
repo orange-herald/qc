@@ -1,5 +1,5 @@
-# Product Name
-> Short blurb about what your product does.
+# QueryClick Challenge
+> Solving the 'add-commas-to-number' challenge three different ways.
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
