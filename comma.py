@@ -51,19 +51,25 @@ def add_the_commas_regex(i):
 
 def add_the_commas_diy(i):
     """
-    Most complex method using homebrew implementation.
+    Most complex method using my own implementation.
     :param i: Integer value to format.
-    :return: Value with thousands separated with commas
+    :return: Value with thousands separated with commas.
     """
     number = str(i)
 
-    # Simple case - no commas required
+    # Simple case 1: no commas required
     if len(number) < 4:
         return number
 
     decimal_part = False
+    is_negative = False
 
-    # Special case: decimal values
+    # Special case 2: negative values
+    if number[0] is '-':
+        is_negative = True
+        number = number[1:]
+
+    # Special case 3: decimal values
     if number.find('.') is not -1:
         decimal_part = number.split('.')[1]
         number = number.split('.')[0]
@@ -72,10 +78,12 @@ def add_the_commas_diy(i):
 
     good_number = []
 
+    # Find number of leading digits before first comma
     first_comma = len(number) % 3
     if first_comma is 0:
         first_comma = 3
 
+    # Last comma always has three digits after
     last_comma = len(number) - 3
     commas = list(range(first_comma, last_comma + 1, 3))
 
@@ -89,6 +97,14 @@ def add_the_commas_diy(i):
     good_number = ''.join(good_number)
 
     if decimal_part is not False:
-        return '.'.join([good_number, decimal_part])
+        good_number = '.'.join([good_number, decimal_part])
+
+    if is_negative is True:
+        good_number = ''.join(['-', good_number])
 
     return good_number
+
+
+print(add_the_commas_diy(123))
+print(add_the_commas_diy(-123))
+print(add_the_commas_diy(-123.03332))
