@@ -9,13 +9,13 @@ The first solution uses the [Humanize](https://pypi.python.org/pypi/humanize) pa
 
 The second solution uses regular expressions to determine the correct placement of the separators. Finally, to demonstrate my ability to think algorithimacally, I developed my own implementation which uses modulus operation to determine the position of the first separator then generates a range of comma positions. 
 
-![](res/queryclick_logo.svg)
-
+<img src="res/queryclick_logo.svg" alt="" width="250">
+    
 ## Installation
 
 
 ```sh
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 Run tests:
